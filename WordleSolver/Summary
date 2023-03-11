@@ -1,0 +1,3 @@
+This is a program I made when I was first learning python in high school and my first successful big project. 
+It is meant to solve the wordle by giving the user recommended words. 
+It is slow and unoptimized, but it is functional and can find the wordle extremely quickly, having a median solve time of 3 guesses and an undefeated record
