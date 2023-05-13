@@ -2,11 +2,8 @@
 Autodraft on ESPN's fantasy app and fantasy apps in general are infamously
 very awful. The main issue with it is that it defaults to PPR no superflex
 draft order priority so lots of the picks make little to no sense in teams with different
-settings. I made this program so that I could run autodraft with the correct draft
-positions (cdp) and improve autodraft for the people in my league if they can't make it.
-fill in cdp dictionary to optimized draft order for your format and run the program.
-I plan to make modifications to the program to make it more user friendly once it is
-closer to draft time, but it is technically functional right now.
+settings. To use, fill in cdp dictionary to optimized draft order for your format and run 
+the program.
 '''
 
 with open('cdp.txt') as file:
