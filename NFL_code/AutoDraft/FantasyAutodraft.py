@@ -6,6 +6,19 @@ settings. To use, fill in cdp dictionary to optimized draft order for your forma
 the program.
 '''
 
+class Team:
+
+    def __init__(self):
+        self.wrCount = 0
+        self.rbCount = 0
+        self.teCount = 0
+        self.qbCount = 0
+        self.dstCount = 0
+        self.kCount = 0
+        self.players = []
+
+    
+
 with open('cdp.txt') as file:
     old_info = [x.strip() for x in file.readlines()]
 
@@ -37,6 +50,7 @@ def make_cdp(info, length_of_draft):
     return cdp
 
 cdp = make_cdp(info, 100)
+picked  = set()
 sorted_by_rel_val = {k: v for k, v in sorted(cdp.items(), key=lambda player: player[1], reverse=True)}
 print(cdp)
 
@@ -45,7 +59,7 @@ while cdp:
     print(f'best five picks: {best_picks(cdp, 5)}')
     print(f'best pick: {best_picks(cdp, 1)}')
     player = "Start"
-    while not player.isdigit():
+    while not player.isdigit() or int(player) in picked:
         player = input("\n---------------------------------------\nUse a number!\nWhat CDP player was picked? ")
         if player == "end":
             break
@@ -56,6 +70,7 @@ while cdp:
         while not player.isdigit():
             player = input("\n---------------------------------------\nUse a number!\nWhat CDP player was picked? ")
         player = int(player)
+    picked.add(player)
     draft_order.append(cdp.pop(player))
 
 print(draft_order)

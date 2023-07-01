@@ -1,7 +1,4 @@
 1: Christian McCaffrey
-2: Jonathan Taylor
-3: Austin Ekeler
-4: Saquon Barkley
-5: Justin Jefferson
-6: Patrick Mahomes II
-7: Josh Allen
+2: Patrick Mahomes II
+3: Josh Allen
+4: Austin Ekeler
