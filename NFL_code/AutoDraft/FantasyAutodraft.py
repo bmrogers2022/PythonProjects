@@ -87,6 +87,14 @@ for x in old_info:
     while x[i] != "(":
         player_name += x[i]
         i+= 1
+    while x[i] != "\t":
+        i += 1
+    while x[i] == "\t":
+        i += 1
+    player_name += " "
+    while x[i] != "\t":
+        player_name += x[i]
+        i += 1
     info.append(player_name)
 
 draft_order = []
@@ -107,7 +115,7 @@ def make_cdp(info, length_of_draft):
         cdp[i+1] = info[i]
     return cdp
 
-cdp = make_cdp(info, 100)
+cdp = make_cdp(info, 300)
 picked  = set()
 sorted_by_rel_val = {k: v for k, v in sorted(cdp.items(), key=lambda player: player[1], reverse=True)}
 print(cdp)

@@ -1,15 +1,9 @@
-1: Josh Jacobs
-2: Josh Allen
-3: Jaylen Waddle
-4: Patrick Mahomes II
-5: CeeDee Lamb
-6: Austin Ekeler
-7: Jonathan Taylor
-8: Aaron Rodgers
-9: Jahmyr Gibbs
-10: Daniel Jones
-11: Jalen Hurts
-12: Davante Adams
-13: Kenneth Walker III
-14: Dak Prescott
-15: Christian McCaffrey
+1: Josh Jacobs RB5
+2: Davante Adams WR7
+3: Jonathan Taylor RB3
+4: Patrick Mahomes II QB1
+5: Josh Allen QB2
+6: Christian McCaffrey RB1
+7: Saquon Barkley RB4
+8: Justin Jefferson WR1
+9: Dak Prescott QB9
