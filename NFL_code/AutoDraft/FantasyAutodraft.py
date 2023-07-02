@@ -6,21 +6,79 @@ settings. To use, fill in cdp dictionary to optimized draft order for your forma
 the program.
 '''
 
+# setting up league class
+class League:
+
+    def __init__(self, picks):
+        self.teams = []
+        self.team_count = 0
+        self.picks = picks
+    
+    def updateCount(self):
+        team_count = len(self.teams)
+    
+# saving data of all teams in league
 class Team:
 
-    def __init__(self):
+    def __init__(self, league, name):
         self.wrCount = 0
         self.rbCount = 0
         self.teCount = 0
         self.qbCount = 0
         self.dstCount = 0
         self.kCount = 0
+        self.league = league
+        self.name = name
+        self.picks_left = league.picks
         self.players = []
+
+    def addPlayer(self, player):
+        '''
+        if player is not on the list of pickable players but is still picked,
+        take pick away and move on
+        '''
+        if player == 0:
+            self.picks_left -= 1
+            return 0
+
+        self.players.append(player)
+
+        if "RB" in player:
+            self.rbCount += 1
+        elif "WR" in player:
+            self.wrCount += 1
+        elif "TE" in player:
+            self.teCount += 1
+        elif "QB" in player:
+            self.qbCount += 1
+        elif "DST" in player:
+            self.dstCount += 1
+        elif "K" in player:
+            self.kCount += 1
+        self.picks_left -= 1
 
     
 
 with open('cdp.txt') as file:
     old_info = [x.strip() for x in file.readlines()]
+
+picks_count = "0"
+
+while not picks_count.isdigit() or int(picks_count) < 1:
+    picks_count = input("How many picks per team in your league: ")
+
+your_league = League(int(picks_count))
+
+team_count = "0"
+
+while not team_count.isdigit() or int(team_count) < 1:
+    team_count = input("How many teams are in your league: ")
+
+for i in range(int(team_count)):
+    team_name = input(f"Enter team {i+1}s name: ")
+    your_league.teams.append(Team(your_league, team_name))
+
+your_league.updateCount()
 
 info = []
 for x in old_info:
@@ -71,7 +129,9 @@ while cdp:
             player = input("\n---------------------------------------\nUse a number!\nWhat CDP player was picked? ")
         player = int(player)
     picked.add(player)
-    draft_order.append(cdp.pop(player))
+    official_pick = cdp.pop(player)
+    
+    draft_order.append(official_pick)
 
 print(draft_order)
 
