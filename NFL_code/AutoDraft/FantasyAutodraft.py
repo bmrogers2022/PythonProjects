@@ -125,8 +125,11 @@ while cdp:
         break
     player = int(player)
     while player not in cdp:
-        while not player.isdigit():
+        player = str(player)
+        while not player.isdigit() or int(player) not in cdp:
             player = input("\n---------------------------------------\nUse a number!\nWhat CDP player was picked? ")
+            if player == "end":
+                break
         player = int(player)
     picked.add(player)
     official_pick = cdp.pop(player)

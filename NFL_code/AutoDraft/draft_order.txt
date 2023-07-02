@@ -1,4 +1,15 @@
-1: Christian McCaffrey
-2: Patrick Mahomes II
-3: Josh Allen
-4: Austin Ekeler
+1: Josh Jacobs
+2: Josh Allen
+3: Jaylen Waddle
+4: Patrick Mahomes II
+5: CeeDee Lamb
+6: Austin Ekeler
+7: Jonathan Taylor
+8: Aaron Rodgers
+9: Jahmyr Gibbs
+10: Daniel Jones
+11: Jalen Hurts
+12: Davante Adams
+13: Kenneth Walker III
+14: Dak Prescott
+15: Christian McCaffrey
