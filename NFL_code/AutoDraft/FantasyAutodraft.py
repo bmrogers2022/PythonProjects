@@ -58,9 +58,10 @@ class Team:
         self.picks_left -= 1
 
     def display(self):
-        info1 = f"Players: {self.players}\nQBs: {self.qbCount}\nRBs: {self.rbCount}\n"
-        info2 = f"WRs: {self.wrCount}\nTEs: {self.teCount}\nDSTs:{self.dstCount}\nKs: {self.kCount}\n"
-        print(info1+info2)
+        team_name = f"\nTeam: {self.name}"
+        info1 = f"\nPlayers: {self.players}\nQBs: {self.qbCount}\nRBs: {self.rbCount}\n"
+        info2 = f"WRs: {self.wrCount}\nTEs: {self.teCount}\nDSTs:{self.dstCount}\nKs: {self.kCount}"
+        print(team_name+info1+info2)
 
 with open('cdp.txt') as file:
     old_info = [x.strip() for x in file.readlines()]
@@ -81,7 +82,7 @@ for i in range(int(team_count)):
     team_name = input(f"Enter team {i+1}s name: ")
     your_league.teams.append(Team(your_league, team_name))
 
-your_league.updateCount()
+your_league.team_count = int(team_count)
 
 info = []
 for x in old_info:
@@ -123,7 +124,9 @@ picked  = set()
 sorted_by_rel_val = {k: v for k, v in sorted(cdp.items(), key=lambda player: player[1], reverse=True)}
 print(cdp)
 
-while cdp:
+teams_pick = 0
+
+while cdp and your_league.teams[-1].picks_left > 0:
     print(f'available picks: {cdp}')
     print(f'best five picks: {best_picks(cdp, 5)}')
     print(f'best pick: {best_picks(cdp, 1)}')
@@ -146,8 +149,12 @@ while cdp:
     official_pick = cdp.pop(player)
     
     draft_order.append(official_pick)
+    your_league.teams[teams_pick % your_league.team_count].addPlayer(official_pick)
+    teams_pick += 1
 
 print(draft_order)
+for i in your_league.teams:
+    i.display()
 
 # makes text file displaying the order of the draft to save for later use
 with open('draft_order.txt', 'w+') as picks:

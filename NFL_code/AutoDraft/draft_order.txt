@@ -1,0 +1,9 @@
+1: Christian McCaffrey RB1
+2: Patrick Mahomes II QB1
+3: Josh Allen QB2
+4: Austin Ekeler RB2
+5: Jalen Hurts QB3
+6: Jonathan Taylor RB3
+7: Saquon Barkley RB4
+8: Justin Jefferson WR1
+9: Joe Burrow QB4
