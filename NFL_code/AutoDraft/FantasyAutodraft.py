@@ -57,7 +57,10 @@ class Team:
             self.kCount += 1
         self.picks_left -= 1
 
-    
+    def display(self):
+        info1 = f"Players: {self.players}\nQBs: {self.qbCount}\nRBs: {self.rbCount}\n"
+        info2 = f"WRs: {self.wrCount}\nTEs: {self.teCount}\nDSTs:{self.dstCount}\nKs: {self.kCount}\n"
+        print(info1+info2)
 
 with open('cdp.txt') as file:
     old_info = [x.strip() for x in file.readlines()]
