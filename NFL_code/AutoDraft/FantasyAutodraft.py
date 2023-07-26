@@ -127,6 +127,7 @@ sorted_by_rel_val = {k: v for k, v in sorted(cdp.items(), key=lambda player: pla
 print(cdp)
 
 teams_pick = 0
+teams_reverse = False
 
 while cdp and your_league.teams[-1].picks_left > 0:
     print(f'available picks: {cdp}')
@@ -151,8 +152,28 @@ while cdp and your_league.teams[-1].picks_left > 0:
     official_pick = cdp.pop(player)
     
     draft_order.append(official_pick)
-    your_league.teams[teams_pick % your_league.team_count].addPlayer(official_pick)
-    teams_pick += 1
+
+    # this is for non snake draft
+    # your_league.teams[teams_pick % your_league.team_count].addPlayer(official_pick)
+    # teams_pick += 1
+
+    # this is for snake draft
+
+    your_league.teams[teams_pick].addPlayer(official_pick)
+
+    if teams_reverse:
+        teams_pick -= 1
+    else:
+        teams_pick += 1
+
+    if teams_pick == your_league.team_count:
+        teams_pick = your_league.team_count - 1
+        teams_reverse = True
+    elif teams_pick == -1:
+        teams_pick = 0
+        teams_reverse = False
+
+    
 
 print(draft_order)
 for i in your_league.teams:

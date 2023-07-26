@@ -1,13 +1,15 @@
-1: Justin Jefferson WR1
-2: Patrick Mahomes II QB1
-3: Christian McCaffrey RB1
-4: Austin Ekeler RB2
-5: Jalen Hurts QB2
+1: Patrick Mahomes II QB1
+2: Christian McCaffrey RB1
+3: Justin Jefferson WR1
+4: Jalen Hurts QB2
+5: Josh Allen QB3
 6: Ja'Marr Chase WR2
-7: Cooper Kupp WR3
-8: Travis Kelce TE1
-9: Tyreek Hill WR4
-10: Bijan Robinson RB4
-11: Saquon Barkley RB3
-12: Stefon Diggs WR5
-13: Josh Allen QB3
+7: Austin Ekeler RB2
+8: Cooper Kupp WR3
+9: Travis Kelce TE1
+10: Tyreek Hill WR4
+11: Joe Burrow QB4
+12: Saquon Barkley RB3
+13: Stefon Diggs WR5
+14: Bijan Robinson RB4
+15: Lamar Jackson QB5
