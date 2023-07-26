@@ -63,7 +63,9 @@ class Team:
         info2 = f"WRs: {self.wrCount}\nTEs: {self.teCount}\nDSTs:{self.dstCount}\nKs: {self.kCount}"
         print(team_name+info1+info2)
 
-with open('cdp.txt') as file:
+current_file = "cdp_updated.txt"
+
+with open('cdp_updated.txt') as file:
     old_info = [x.strip() for x in file.readlines()]
 
 picks_count = "0"

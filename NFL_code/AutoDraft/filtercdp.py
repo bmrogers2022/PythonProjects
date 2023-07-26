@@ -1,8 +1,8 @@
-with open("cdp.txt", "r") as cdp:
-    info = [x.strip() for x in cdp.readlines() if x[0] != "-" and x[0].isdigit() == False]
+with open("cdp_updated.txt", "r") as cdp:
+    info = [x.strip() for x in cdp.readlines() if x[0] != "-" and x[0].isdigit() == False and x[0:4] != "Tier"]
     print(info)
 
-with open("cdp.txt", "w+") as cdp:
+with open("cdp_updated.txt", "w+") as cdp:
     for i in range(len(info)):
         cdp.write(f'{info[i]}\n')
 
