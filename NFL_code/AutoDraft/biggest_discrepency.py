@@ -1,4 +1,6 @@
-with open("cdp.txt", "r") as cdp:
+current_file = "cdp_updated.txt"
+
+with open(current_file, "r") as cdp:
     info = [x.strip() for x in cdp.readlines()]
     cdp_rankings = {}
     count = 1
