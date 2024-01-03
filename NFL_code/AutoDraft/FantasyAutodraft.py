@@ -80,9 +80,16 @@ team_count = "0"
 while not team_count.isdigit() or int(team_count) < 1:
     team_count = input("How many teams are in your league: ")
 
-for i in range(int(team_count)):
-    team_name = input(f"Enter team {i+1}s name: ")
-    your_league.teams.append(Team(your_league, team_name))
+# Optional feature to add team names
+name_bool = input("Do you want to name teams? Y/N")
+if name_bool in "Yy":
+    for i in range(int(team_count)):
+        team_name = input(f"Enter team {i+1}s name: ")
+        your_league.teams.append(Team(your_league, team_name))
+else:
+    for i in range(int(team_count)):
+        team_name = f"Team {i+1}"
+        your_league.teams.append(Team(your_league, team_name))
 
 your_league.team_count = int(team_count)
 

@@ -4,8 +4,8 @@ props. Goal is to have customizable league settings, and perhaps a website to us
 player props to create a statistically optimal drafting plan. Last model was successful,
 landing a 1st 2nd and 3rd place in the three 10 man leagues it was used in with profits of
 1200 dollars. Hopefully we can find even more success by using tensorflow to analyze relative
-positional value for different league settings more precisely and create a profitable
-autodrafter
+positional value for different league settings more precisely and create a unique profitable
+autodrafter for all possible settings
 '''
 
 # setting up league class
@@ -65,11 +65,6 @@ class Team:
         info2 = f"WRs: {self.wrCount}\nTEs: {self.teCount}\nDSTs:{self.dstCount}\nKs: {self.kCount}"
         print(team_name+info1+info2)
 
-current_file = "cdp_updated.txt"
-
-with open('cdp_updated.txt') as file:
-    old_info = [x.strip() for x in file.readlines()]
-
 picks_count = "0"
 
 while not picks_count.isdigit() or int(picks_count) < 1:
@@ -81,6 +76,40 @@ team_count = "0"
 
 while not team_count.isdigit() or int(team_count) < 1:
     team_count = input("How many teams are in your league: ")
+
+WR_count = "-1"
+
+while not WR_count.isdigit() or int(WR_count) < 0:
+    WR_count = input("How many WRs must you start")
+
+RB_count = "-1"
+
+while not RB_count.isdigit() or int(RB_count) < 0:
+    RB_count = input("How many RBs must you start")
+
+QB_count = "-1"
+
+while not QB_count.isdigit() or int(QB_count) < 0:
+    QB_count = input("How many QBs must you start (if superflex enter 2)")
+
+TE_count = "-1"
+
+while not TE_count.isdigit() or int(TE_count) < 0:
+    TE_count = input("How many TEs must you start")
+
+WRTERB_count = "-1"
+
+# TODO: possibly add other flex options in the future
+while not WRTERB_count.isdigit() or int(WRTERB_count) < 0:
+    WRTERB_count = input("How many flex spots for WR/RB/TE do you have?")
+
+ppr = "-1"
+while not ppr.isdigit() or -1 < int(ppr) < 3:
+    ppr = input("Input 0 for non ppr, 1 for half ppr, and 2 for ppr")
+
+passing_TD = "4"
+while not passing_TD.isdigit(): # technically possible some leagues making passing TDS negative
+    passing_TD = input("how many points per passing TD")
 
 # Optional feature to add team names
 name_bool = input("Do you want to name teams? Y/N")
@@ -95,101 +124,8 @@ else:
 
 your_league.team_count = int(team_count)
 
-info = []
-for x in old_info:
-    player_name = ""
-    i = 0
-    while x[i] != "(":
-        player_name += x[i]
-        i+= 1
-    while x[i] != "\t":
-        i += 1
-    while x[i] == "\t":
-        i += 1
-    player_name += " "
-    while x[i] != "\t":
-        player_name += x[i]
-        i += 1
-    info.append(player_name)
-
-draft_order = []
-
-# enter one player name on each line of the cdp text file
-cdp = {}
-
-def best_picks(cdp, players):
-    players_returned = {}
-    for key in cdp.keys():
-        if len(players_returned) < players:
-            players_returned[key] = cdp[key]
-    return players_returned
-
-def make_cdp(info, length_of_draft):
-    cdp = {}
-    for i in range(length_of_draft):
-        cdp[i+1] = info[i]
-    return cdp
-
-cdp = make_cdp(info, 300)
-picked  = set()
-sorted_by_rel_val = {k: v for k, v in sorted(cdp.items(), key=lambda player: player[1], reverse=True)}
-print(cdp)
-
-teams_pick = 0
-teams_reverse = False
-
-while cdp and your_league.teams[-1].picks_left > 0:
-    print(f'available picks: {cdp}')
-    print(f'best five picks: {best_picks(cdp, 5)}')
-    print(f'best pick: {best_picks(cdp, 1)}')
-    player = "Start"
-    while not player.isdigit() or int(player) in picked:
-        player = input("\n---------------------------------------\nUse a number!\nWhat CDP player was picked? ")
-        if player == "end":
-            break
-    if player == "end":
-        break
-    player = int(player)
-    while player not in cdp:
-        player = str(player)
-        while not player.isdigit() or int(player) not in cdp:
-            player = input("\n---------------------------------------\nUse a number!\nWhat CDP player was picked? ")
-            if player == "end":
-                break
-        player = int(player)
-    picked.add(player)
-    official_pick = cdp.pop(player)
-    
-    draft_order.append(official_pick)
-
-    # this is for non snake draft
-    # your_league.teams[teams_pick % your_league.team_count].addPlayer(official_pick)
-    # teams_pick += 1
-
-    # this is for snake draft
-
-    your_league.teams[teams_pick].addPlayer(official_pick)
-
-    if teams_reverse:
-        teams_pick -= 1
-    else:
-        teams_pick += 1
-
-    if teams_pick == your_league.team_count:
-        teams_pick = your_league.team_count - 1
-        teams_reverse = True
-    elif teams_pick == -1:
-        teams_pick = 0
-        teams_reverse = False
-
-    
-
-print(draft_order)
-for i in your_league.teams:
-    i.display()
-
-# makes text file displaying the order of the draft to save for later use
-with open('draft_order.txt', 'w+') as picks:
-    for i in range(len(draft_order)):
-        picks.write(f'{i+1}: {draft_order[i]}\n')
-        
+"""
+TODO: hopefully find some sort of way to import vegas projections of yards, receptions, TDS etc.
+if there isn't an easy way to do it I can manually input the data but the goal is for projections
+to be live
+"""  
